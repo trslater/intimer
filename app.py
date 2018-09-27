@@ -1,7 +1,9 @@
 import sys
-from time import time, sleep
-from itertools import cycle
 import subprocess
+
+from time import time, sleep
+from datetime import datetime, timedelta
+from itertools import cycle
 
 timers = cycle([
     {
@@ -20,8 +22,8 @@ def main():
             start = time()
 
             remaining = timer["duration"] - elapsed
-            
-            sys.stdout.write(str(remaining) + "\r")
+
+            sys.stdout.write(str(timedelta(seconds=remaining)) + "\r")
             sys.stdout.flush()
 
             sleep(1 - (time() - start))
