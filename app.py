@@ -1,31 +1,35 @@
+import sys
 from time import time, sleep
 from itertools import cycle
 import subprocess
 
 timers = cycle([
     {
-        "duration":     5,
+        "duration":     1200,
         "done message": "Time to rest your eyes!"
     },
     {
-        "duration":     10,
+        "duration":     20,
         "done message": "Back to work..."
     },
 ])
 
 def main():
     for timer in timers:
-        for remaining in range(timer["duration"]):
+        for elapsed in range(timer["duration"]):
             start = time()
 
-            go(timer, remaining)
+            go(timer, elapsed)
 
             sleep(1 - (time() - start))
 
         macos_notify(timer["done message"])
 
-def go(timer, remaining):
-    print(timer["duration"] - remaining)
+def go(timer, elapsed):
+    remaining = timer["duration"] - elapsed
+    
+    sys.stdout.write(str(remaining) + "\r")
+    sys.stdout.flush()
 
 def macos_notify(message):
     # osascript -e 'display notification "Lorem ipsum dolor sit amet" with title "Title"'
