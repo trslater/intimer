@@ -3,11 +3,11 @@ from itertools import cycle
 
 timers = cycle([
     {
-        "duration":     1200,
+        "duration":     5,
         "done message": "Time to rest your eyes!"
     },
     {
-        "duration":     20,
+        "duration":     10,
         "done message": "Back to work..."
     },
 ])
@@ -21,9 +21,7 @@ def main():
 
             sleep(1 - (time() - start))
 
-def get_next_timer():
-    for timer in timers:
-        yield timer
+        print(timer["done message"])
 
 if __name__ == "__main__":
     main()
