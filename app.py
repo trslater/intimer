@@ -17,11 +17,14 @@ def main():
         for remaining in range(timer["duration"]):
             start = time()
 
-            print(remaining)
+            go(timer, remaining)
 
             sleep(1 - (time() - start))
 
         print(timer["done message"])
+
+def go(timer, remaining):
+    print(timer["duration"] - remaining)
 
 if __name__ == "__main__":
     main()
