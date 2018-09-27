@@ -19,17 +19,14 @@ def main():
         for elapsed in range(timer["duration"]):
             start = time()
 
-            go(timer, elapsed)
+            remaining = timer["duration"] - elapsed
+            
+            sys.stdout.write(str(remaining) + "\r")
+            sys.stdout.flush()
 
             sleep(1 - (time() - start))
 
         macos_notify(timer["done message"])
-
-def go(timer, elapsed):
-    remaining = timer["duration"] - elapsed
-    
-    sys.stdout.write(str(remaining) + "\r")
-    sys.stdout.flush()
 
 def macos_notify(message):
     # osascript -e 'display notification "Lorem ipsum dolor sit amet" with title "Title"'
